@@ -9,11 +9,12 @@ import cors from "cors"
 
 dotenv.config()
 const app = express()
-const PORT =process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
 
 connectDB();
 app.use(cors({
-  origin:"http://localhost:5173",
+  origin: process.env.CLIENT_URL,
+  // origin:"http://localhost:5173", Local Host
   credentials: true
 }));
 
@@ -26,10 +27,10 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 app.use("/api/leads", leadRoutes);
 
-app.get("/",(req,res)=>{
-    res.send("hello g")
+app.get("/", (req, res) => {
+  res.send("hello g")
 })
 
-app.listen(PORT ,()=>{
-    console.log(`server is running on port ${PORT}`)
+app.listen(PORT, () => {
+  console.log(`server is running on port ${PORT}`)
 })
